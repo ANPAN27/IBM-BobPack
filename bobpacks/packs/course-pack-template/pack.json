@@ -1,0 +1,40 @@
+{
+  "$schema": "../../schemas/pack.schema.json",
+  "name": "course-pack-template",
+  "version": "1.0.0",
+  "description": "Instructor-ready starter pack: commit it to your course repo and every student's Bob gets the same rules, tone and integrity stance automatically.",
+  "author": "BobPacks",
+  "license": "MIT",
+  "audience": "educator",
+  "level": "beginner",
+  "integrityStance": "course-policy",
+  "ibmProducts": [],
+  "bobVersion": ">=2.0.0",
+  "tags": ["instructor", "course", "classroom", "integrity", "educator"],
+  "components": {
+    "modes": [
+      {
+        "slug": "course-assistant",
+        "path": "modes/course-assistant.yaml"
+      }
+    ],
+    "rules": [
+      {
+        "path": "rules/course-pack/01-integrity.md",
+        "installTo": "rules"
+      },
+      {
+        "path": "rules/course-pack/02-tone.md",
+        "installTo": "rules"
+      },
+      {
+        "path": "rules/course-pack/03-scope.md",
+        "installTo": "rules"
+      }
+    ],
+    "agents": {
+      "path": "agents/AGENTS.snippet.md"
+    }
+  },
+  "requires": []
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "../../schemas/pack.schema.json",
+  "name": "study-buddy",
+  "version": "1.0.0",
+  "description": "Turns a codebase, notes or lecture material into quizzes, flashcards and concept summaries to help you study.",
+  "author": "BobPacks",
+  "license": "MIT",
+  "audience": "student",
+  "level": "beginner",
+  "integrityStance": "hints-only",
+  "ibmProducts": [],
+  "bobVersion": ">=2.0.0",
+  "tags": ["study", "quizzes", "flashcards", "revision", "student"],
+  "components": {
+    "skills": [
+      { "name": "study-buddy", "path": "skills/study-buddy", "autoInvoke": true }
+    ]
+  },
+  "requires": []
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "../../schemas/pack.schema.json",
+  "name": "hackathon-starter",
+  "version": "1.0.0",
+  "description": "Scaffolds a hackathon project with tests, a README and a demo script — from a one-line idea to a repo ready to present.",
+  "author": "BobPacks",
+  "license": "MIT",
+  "audience": "student",
+  "level": "intermediate",
+  "integrityStance": "full-solutions",
+  "ibmProducts": [],
+  "bobVersion": ">=2.0.0",
+  "tags": ["hackathon", "scaffold", "student", "project", "starter"],
+  "components": {
+    "skills": [
+      { "name": "hackathon-starter", "path": "skills/hackathon-starter", "autoInvoke": true }
+    ],
+    "rules": [
+      { "path": "rules/hackathon-starter/01-ship-fast.md", "installTo": "rules" }
+    ]
+  },
+  "requires": []
+}

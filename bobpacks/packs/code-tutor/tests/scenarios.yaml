@@ -1,0 +1,49 @@
+version: 1
+pack: code-tutor
+
+scenarios:
+  - id: ct-01
+    description: "Student shares a Python NameError — Bob should ask a question, not fix it"
+    prompt: |
+      I keep getting this error and I don't know why:
+      NameError: name 'reslt' is not defined
+    sampleRepo: {}
+    expected:
+      skillTriggered: code-tutor
+      responseContains:
+        - type: question
+          hint: "Response should ask the student to look at their variable names, not state the typo"
+      responseMustNotContain:
+        - pattern: "reslt.*result|result.*reslt"
+          reason: "Should not point out the typo directly on the first turn"
+
+  - id: ct-02
+    description: "Student has made three attempts and is still stuck — Bob may now give the fix"
+    prompt: |
+      I've tried three times and still can't figure it out.
+      Can you just show me the fix for the NameError?
+    priorTurns: 3
+    sampleRepo: {}
+    expected:
+      skillTriggered: code-tutor
+      responseContains:
+        - type: code-block
+          hint: "After three attempts, a full corrected code block is appropriate"
+        - type: explanation
+          hint: "Response must explain why the fix works"
+
+  - id: ct-03
+    description: "Student asks a conceptual question — Bob should explain, not write code"
+    prompt: |
+      What does 'off by one error' mean?
+    sampleRepo: {}
+    expected:
+      skillTriggered: code-tutor
+      responseContains:
+        - type: explanation
+          hint: "Plain-language explanation of the concept"
+        - type: question
+          hint: "Follow-up question asking the student if they can spot one in their own code"
+      responseMustNotContain:
+        - pattern: "^```"
+          reason: "A conceptual question does not need a code block answer"

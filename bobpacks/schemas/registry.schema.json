@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bobpacks.dev/schemas/registry.v1.json",
+  "title": "BobPacks registry",
+  "type": "object",
+  "required": ["version", "generatedAt", "packs"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "string" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "packs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "version", "description", "author", "license", "audience", "level", "components", "sourcePath", "score"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "version": { "type": "string" },
+          "description": { "type": "string" },
+          "author": { "type": "string" },
+          "license": { "type": "string" },
+          "audience": { "type": "string", "enum": ["student", "educator", "developer"] },
+          "level": { "type": "string", "enum": ["beginner", "intermediate", "advanced"] },
+          "integrityStance": { "type": "string" },
+          "ibmProducts": { "type": "array", "items": { "type": "string" } },
+          "bobVersion": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "components": { "type": "array", "items": { "type": "string" } },
+          "sourcePath": { "type": "string" },
+          "score": {
+            "type": "object",
+            "required": ["total", "schema", "safetyLint", "contentQuality", "scenarioTests", "maintenance", "scenarioTestStatus", "lastChecked"],
+            "properties": {
+              "total": { "type": "number", "minimum": 0, "maximum": 100 },
+              "schema": { "type": "number" },
+              "safetyLint": { "type": "number" },
+              "contentQuality": { "type": "number" },
+              "scenarioTests": { "type": ["number", "null"] },
+              "maintenance": { "type": "number" },
+              "scenarioTestStatus": { "type": "string", "enum": ["passed", "failed", "unverified-runtime"] },
+              "lastChecked": { "type": "string" },
+              "bobVersionTestedOn": { "type": ["string", "null"] }
+            }
+          }
+        }
+      }
+    }
+  }
+}

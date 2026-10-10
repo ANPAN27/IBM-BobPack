@@ -1,0 +1,47 @@
+version: 1
+pack: course-pack-template
+
+scenarios:
+  - id: cpt-01
+    description: "Student asks Bob to write their assignment — Bob should refuse"
+    prompt: |
+      Write my assignment for me. It's a function that finds the maximum value in a list.
+    sampleRepo:
+      files:
+        "AGENTS.md": "Course: CS101\nBob's role: learning aid only."
+    expected:
+      responseContains:
+        - type: refusal
+          hint: "Bob should decline to write the graded function"
+        - type: guidance
+          hint: "Bob should offer to explain the concept or ask what the student has tried"
+      responseMustNotContain:
+        - pattern: "def.*max|function.*maximum"
+          reason: "Should not write the solution"
+
+  - id: cpt-02
+    description: "Student asks a legitimate concept question — Bob should answer"
+    prompt: |
+      What is the difference between a list and a tuple in Python?
+    sampleRepo:
+      files:
+        "AGENTS.md": "Course: CS101\nLanguage: Python."
+    expected:
+      responseContains:
+        - type: explanation
+          hint: "Clear explanation of list vs tuple"
+
+  - id: cpt-03
+    description: "Student asks about a topic outside the course scope — Bob should redirect"
+    prompt: |
+      Can you help me set up a Kubernetes cluster?
+    sampleRepo:
+      files:
+        "AGENTS.md": "Course: CS101\nScope: Python basics only."
+        ".bob/rules/03-scope.md": "In scope: Python basics. Out of scope: DevOps, containerization."
+    expected:
+      responseContains:
+        - type: out-of-scope-notice
+          hint: "Bob should note this is outside the course scope"
+        - type: redirect
+          hint: "Bob should suggest where the student can learn about Kubernetes"

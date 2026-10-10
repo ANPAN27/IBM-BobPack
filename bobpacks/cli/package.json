@@ -1,0 +1,25 @@
+{
+  "name": "bobpacks",
+  "version": "1.0.0",
+  "description": "Install complete, vetted IBM Bob setups with one command.",
+  "type": "module",
+  "bin": {
+    "bobpacks": "./src/index.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.js",
+    "sync": "node scripts/sync.js",
+    "package": "node scripts/package.js"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "semver": "^7.6.3",
+    "yaml": "^2.6.0"
+  },
+  "devDependencies": {},
+  "license": "MIT"
+}

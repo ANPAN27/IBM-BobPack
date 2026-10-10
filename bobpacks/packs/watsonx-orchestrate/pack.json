@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schemas/pack.schema.json",
+  "name": "watsonx-orchestrate",
+  "version": "1.0.0",
+  "description": "Skill pack for building watsonx Orchestrate agents and automations — covers tools, skills, flows and deployment.",
+  "author": "BobPacks",
+  "license": "MIT",
+  "audience": "developer",
+  "level": "intermediate",
+  "ibmProducts": ["watsonx-orchestrate"],
+  "bobVersion": ">=2.0.0",
+  "tags": ["watsonx", "orchestrate", "automation", "agents", "ibm"],
+  "components": {
+    "skills": [
+      { "name": "watsonx-orchestrate", "path": "skills/watsonx-orchestrate", "autoInvoke": true }
+    ],
+    "rules": [
+      { "path": "rules/watsonx-orchestrate/01-orchestrate-conventions.md", "installTo": "rules" }
+    ]
+  },
+  "requires": [
+    {
+      "type": "env-var",
+      "name": "WATSONX_API_KEY",
+      "description": "IBM watsonx API key from cloud.ibm.com",
+      "optional": true
+    }
+  ]
+}

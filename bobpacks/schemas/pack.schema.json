@@ -1,0 +1,235 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bobpacks.dev/schemas/pack.v1.json",
+  "title": "BobPack manifest",
+  "description": "pack.json manifest for a BobPack — a versioned bundle of IBM Bob customizations.",
+  "type": "object",
+  "required": ["name", "version", "description", "author", "license", "audience", "level", "components"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference — ignored at validation time."
+    },
+    "name": {
+      "type": "string",
+      "description": "Unique pack identifier. Lowercase, digits and single hyphens only. Must match the pack folder name.",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 64
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version (e.g. 1.0.0).",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+    },
+    "description": {
+      "type": "string",
+      "description": "One-sentence description shown on the site and in CLI output.",
+      "minLength": 10,
+      "maxLength": 280
+    },
+    "author": {
+      "type": "string",
+      "description": "Author name or GitHub handle.",
+      "minLength": 1
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX license identifier. Must be an open license.",
+      "enum": ["MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "CC-BY-4.0", "CC-BY-SA-4.0", "ISC"]
+    },
+    "audience": {
+      "type": "string",
+      "description": "Primary audience for this pack.",
+      "enum": ["student", "educator", "developer"]
+    },
+    "level": {
+      "type": "string",
+      "description": "Skill level required to use this pack.",
+      "enum": ["beginner", "intermediate", "advanced"]
+    },
+    "integrityStance": {
+      "type": "string",
+      "description": "Required for student and educator packs. Describes whether Bob teaches with hints, gives full solutions, or defers to a course policy file.",
+      "enum": ["hints-only", "full-solutions", "course-policy"]
+    },
+    "ibmProducts": {
+      "type": "array",
+      "description": "IBM products this pack is designed for. Use empty array if none.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "watsonx-orchestrate",
+          "watsonx-ai",
+          "db2",
+          "openshift",
+          "mainframe",
+          "cobol",
+          "carbon-design-system",
+          "ibm-cloud",
+          "power-systems",
+          "z-os"
+        ]
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "bobVersion": {
+      "type": "string",
+      "description": "Compatible Bob version range in semver range syntax (e.g. '>=2.0.0').",
+      "minLength": 1
+    },
+    "tags": {
+      "type": "array",
+      "description": "Free-form tags for search and filtering.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+        "maxLength": 32
+      },
+      "maxItems": 10,
+      "uniqueItems": true,
+      "default": []
+    },
+    "components": {
+      "type": "object",
+      "description": "Declares which component types this pack includes and their configuration.",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "skills": {
+          "type": "array",
+          "description": "Skills included in this pack.",
+          "items": {
+            "type": "object",
+            "required": ["name", "path"],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Skill directory name. Must match the folder under skills/ in the pack.",
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+                "maxLength": 64
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path from pack root to the skill directory (e.g. 'skills/code-tutor')."
+              },
+              "autoInvoke": {
+                "type": "boolean",
+                "description": "Whether Bob should auto-invoke this skill based on its description. Defaults to true. Set false to make the skill slash-command only.",
+                "default": true
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "modes": {
+          "type": "array",
+          "description": "Custom modes included in this pack.",
+          "items": {
+            "type": "object",
+            "required": ["slug", "path"],
+            "additionalProperties": false,
+            "properties": {
+              "slug": {
+                "type": "string",
+                "description": "Mode slug — must match the slug: field inside the YAML file. Used for collision detection.",
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+                "maxLength": 64
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path from pack root to the mode YAML file (e.g. 'modes/code-tutor.yaml')."
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "rules": {
+          "type": "array",
+          "description": "Rule files included in this pack.",
+          "items": {
+            "type": "object",
+            "required": ["path", "installTo"],
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "Relative path from pack root to the rule file."
+              },
+              "installTo": {
+                "type": "string",
+                "description": "Target directory relative to .bob/. Use 'rules' for global rules or 'rules-<mode-slug>' for mode-specific rules.",
+                "pattern": "^rules(-[a-z0-9]+(-[a-z0-9]+)*)?$"
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "mcp": {
+          "type": "object",
+          "required": ["path"],
+          "additionalProperties": false,
+          "description": "MCP server fragment to merge into .bob/mcp.json.",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Relative path from pack root to the MCP fragment file (e.g. 'mcp/mcp.fragment.json')."
+            }
+          }
+        },
+        "agents": {
+          "type": "object",
+          "required": ["path"],
+          "additionalProperties": false,
+          "description": "AGENTS.md snippet to append to the project AGENTS.md.",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Relative path from pack root to the AGENTS.md snippet file (e.g. 'agents/AGENTS.snippet.md')."
+            }
+          }
+        }
+      }
+    },
+    "requires": {
+      "type": "array",
+      "description": "Environment requirements the user must satisfy before installing. No secret values.",
+      "items": {
+        "type": "object",
+        "required": ["type", "name"],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Requirement type.",
+            "enum": ["cli", "env-var", "mcp-server", "node-package"]
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the required CLI, env var name, MCP server slug, or package name."
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable explanation of what this requirement is for."
+          },
+          "optional": {
+            "type": "boolean",
+            "description": "If true, the pack functions without this requirement but with reduced capability.",
+            "default": false
+          }
+        }
+      },
+      "default": []
+    }
+  },
+  "if": {
+    "properties": {
+      "audience": { "enum": ["student", "educator"] }
+    }
+  },
+  "then": {
+    "required": ["integrityStance"]
+  }
+}

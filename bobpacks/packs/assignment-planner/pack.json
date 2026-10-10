@@ -1,0 +1,21 @@
+{
+  "$schema": "../../schemas/pack.schema.json",
+  "name": "assignment-planner",
+  "version": "1.0.0",
+  "description": "Turns an assignment brief into a plan, test list and starter file structure — without writing the graded solution.",
+  "author": "BobPacks",
+  "license": "MIT",
+  "audience": "student",
+  "level": "beginner",
+  "integrityStance": "hints-only",
+  "ibmProducts": [],
+  "bobVersion": ">=2.0.0",
+  "tags": ["planning", "assignments", "student", "scaffold"],
+  "components": {
+    "skills": [
+      { "name": "assignment-planner", "path": "skills/assignment-planner", "autoInvoke": true }
+    ],
+    "agents": { "path": "agents/AGENTS.snippet.md" }
+  },
+  "requires": []
+}

@@ -1,0 +1,40 @@
+name: Validate packs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate all packs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: cli/package.json
+
+      - name: Install CLI dependencies
+        run: npm install
+        working-directory: cli
+
+      - name: Run pack validation
+        run: node scripts/validate.js
+
+      - name: Validate registry schema
+        run: node -e "
+          import('ajv').then(({ default: Ajv }) => {
+            const ajv = new Ajv();
+            const schema = JSON.parse(require('fs').readFileSync('schemas/registry.schema.json','utf8'));
+            const data = JSON.parse(require('fs').readFileSync('registry.json','utf8'));
+            const valid = ajv.validate(schema, data);
+            if (!valid) { console.error(ajv.errors); process.exit(1); }
+            console.log('registry.json is valid');
+          });
+        "

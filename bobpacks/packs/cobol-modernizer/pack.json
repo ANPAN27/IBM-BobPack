@@ -1,0 +1,23 @@
+{
+  "$schema": "../../schemas/pack.schema.json",
+  "name": "cobol-modernizer",
+  "version": "1.0.0",
+  "description": "Domain-specific mode for mainframe COBOL modernization: understands COBOL idioms, suggests Java/Python equivalents and explains z/OS context.",
+  "author": "BobPacks",
+  "license": "MIT",
+  "audience": "developer",
+  "level": "advanced",
+  "ibmProducts": ["cobol", "mainframe", "z-os"],
+  "bobVersion": ">=2.0.0",
+  "tags": ["cobol", "mainframe", "modernization", "z-os", "ibm"],
+  "components": {
+    "skills": [
+      { "name": "cobol-modernizer", "path": "skills/cobol-modernizer", "autoInvoke": true }
+    ],
+    "modes": [
+      { "slug": "cobol-modernizer", "path": "modes/cobol-modernizer.yaml" }
+    ],
+    "agents": { "path": "agents/AGENTS.snippet.md" }
+  },
+  "requires": []
+}

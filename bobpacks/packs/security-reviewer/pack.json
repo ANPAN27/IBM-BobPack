@@ -1,0 +1,25 @@
+{
+  "$schema": "../../schemas/pack.schema.json",
+  "name": "security-reviewer",
+  "version": "1.0.0",
+  "description": "Full security review bundle: a dedicated mode, rules and skill that check auth, input validation, secrets handling and dependency hygiene.",
+  "author": "BobPacks",
+  "license": "MIT",
+  "audience": "developer",
+  "level": "advanced",
+  "ibmProducts": [],
+  "bobVersion": ">=2.0.0",
+  "tags": ["security", "review", "audit", "vulnerabilities", "developer"],
+  "components": {
+    "skills": [
+      { "name": "security-reviewer", "path": "skills/security-reviewer", "autoInvoke": true }
+    ],
+    "modes": [
+      { "slug": "security-reviewer", "path": "modes/security-reviewer.yaml" }
+    ],
+    "rules": [
+      { "path": "rules/security-reviewer/01-security-checklist.md", "installTo": "rules-security-reviewer" }
+    ]
+  },
+  "requires": []
+}

@@ -1,0 +1,18 @@
+{
+  "name": "bobpacks-repo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "BobPacks monorepo — registry, packs and CLI",
+  "scripts": {
+    "validate": "node scripts/validate.js",
+    "test": "node scripts/validate.js"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "semver": "^7.6.3",
+    "yaml": "^2.6.0"
+  },
+  "license": "MIT"
+}

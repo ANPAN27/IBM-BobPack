@@ -1,0 +1,40 @@
+{
+  "$schema": "../../schemas/pack.schema.json",
+  "name": "code-tutor",
+  "version": "1.0.0",
+  "description": "Socratic tutor mode: Bob explains errors, asks guiding questions and gives hints before answers — never pastes a finished solution.",
+  "author": "BobPacks",
+  "license": "MIT",
+  "audience": "student",
+  "level": "beginner",
+  "integrityStance": "hints-only",
+  "ibmProducts": [],
+  "bobVersion": ">=2.0.0",
+  "tags": ["tutor", "learning", "socratic", "debugging", "beginner"],
+  "components": {
+    "skills": [
+      {
+        "name": "code-tutor",
+        "path": "skills/code-tutor",
+        "autoInvoke": true
+      }
+    ],
+    "modes": [
+      {
+        "slug": "code-tutor",
+        "path": "modes/code-tutor.yaml"
+      }
+    ],
+    "rules": [
+      {
+        "path": "rules/code-tutor/01-hints-not-solutions.md",
+        "installTo": "rules-code-tutor"
+      },
+      {
+        "path": "rules/code-tutor/02-explain-errors.md",
+        "installTo": "rules-code-tutor"
+      }
+    ]
+  },
+  "requires": []
+}

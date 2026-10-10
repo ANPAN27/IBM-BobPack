@@ -1,0 +1,23 @@
+{
+  "$schema": "../../schemas/pack.schema.json",
+  "name": "debug-coach",
+  "version": "1.0.0",
+  "description": "Step-by-step debugging coach: reproduce, isolate, fix. Walks through each stage without jumping straight to a solution.",
+  "author": "BobPacks",
+  "license": "MIT",
+  "audience": "student",
+  "level": "beginner",
+  "integrityStance": "hints-only",
+  "ibmProducts": [],
+  "bobVersion": ">=2.0.0",
+  "tags": ["debugging", "student", "step-by-step", "errors"],
+  "components": {
+    "skills": [
+      { "name": "debug-coach", "path": "skills/debug-coach", "autoInvoke": true }
+    ],
+    "rules": [
+      { "path": "rules/debug-coach/01-debug-process.md", "installTo": "rules" }
+    ]
+  },
+  "requires": []
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "../../schemas/pack.schema.json",
+  "name": "carbon-ui-builder",
+  "version": "1.0.0",
+  "description": "Build IBM Carbon Design System UIs with Bob: generates accessible React components using correct Carbon tokens, patterns and component APIs.",
+  "author": "BobPacks",
+  "license": "MIT",
+  "audience": "developer",
+  "level": "intermediate",
+  "ibmProducts": ["carbon-design-system"],
+  "bobVersion": ">=2.0.0",
+  "tags": ["carbon", "ui", "react", "design-system", "ibm", "accessibility"],
+  "components": {
+    "skills": [
+      { "name": "carbon-ui-builder", "path": "skills/carbon-ui-builder", "autoInvoke": true }
+    ]
+  },
+  "requires": [
+    {
+      "type": "node-package",
+      "name": "@carbon/react",
+      "description": "Carbon React component library",
+      "optional": false
+    }
+  ]
+}
